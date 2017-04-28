@@ -6,6 +6,11 @@
 
 ``` bash
 # install dependencies
+# as admin
+npm install --global --production windows-build-tools
+npm install --global node-gyp
+
+# standard
 npm install
 
 # serve with hot reload at localhost:8080

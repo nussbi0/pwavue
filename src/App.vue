@@ -1,20 +1,27 @@
 <template>
-  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs">
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
         <span class="mdl-layout-title">vue pwa</span>
+      </div>
+      <!-- Tabs -->
+      <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+        <router-link class="mdl-layout__tab" :to="{ name: 'Home' }" active-class="is-active" exact><i class="material-icons">home</i></router-link>
+        <router-link class="mdl-layout__tab" :to="{ name: 'watchlist' }" active-class="is-active"><i class="material-icons">list</i></router-link>
       </div>
     </header>
     <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">vue pwa</span>
       <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="/#/" @click="hideMenu">Home</a>
-        <a class="mdl-navigation__link" href="/#/watchlist" @click="hideMenu">Watchlist</a>
+        <router-link v-on:click.native="hideMenu" class="mdl-navigation__link" :to="{ name: 'Home' }" active-class="is-active" exact>Home</router-link>
+        <router-link v-on:click.native="hideMenu" class="mdl-navigation__link" :to="{ name: 'watchlist' }" active-class="is-active" exact>Watchlist</router-link>
       </nav>
     </div>
     <main class="mdl-layout__content">
       <div class="page-content">
-        <router-view></router-view>
+        <keep-alive include="home">
+          <router-view></router-view>
+        </keep-alive>
       </div>
     </main>
   </div>
@@ -36,12 +43,8 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://code.getmdl.io/1.2.1/material.blue-red.min.css');
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+.home, .watchlist{
+  margin: 0 1em;
 }
 </style>
